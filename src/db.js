@@ -44,4 +44,19 @@ function poolConfig() {
   // Keyword form. Microsoft style is ";"-separated ("User Id=..."); libpq style is space-separated.
   const parts = cs.includes(";") ? cs.split(";") : cs.split(/\s+/);
   const kv = {};
-  for
+  for (const part of parts) {
+    const i = part.indexOf("=");
+    if (i > 0) kv[part.slice(0, i).trim().toLowerCase().replace(/\s+/g, "")] = part.slice(i + 1).trim();
+  }
+  return {
+    host: kv.server || kv.host,
+    user: kv.userid || kv.user || kv.username || kv.uid,
+    password: kv.password || kv.pwd,
+    database: kv.database || kv.dbname,
+    port: parseInt(kv.port || "5432", 10),
+    ssl, max: 10,
+  };
+}
+
+export const pool = new pg.Pool(poolConfig());
+export const query = (text, params) => pool.query(text, params);
