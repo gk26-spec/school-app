@@ -1,6 +1,6 @@
 {
   "name": "carnival-backend",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Multi-tenant API + PostgreSQL backend for the school carnival scoring app",
   "type": "module",
   "main": "src/server.js",
@@ -16,6 +16,8 @@
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
+    "express-rate-limit": "^7.4.0",
+    "helmet": "^7.1.0",
     "jsonwebtoken": "^9.0.2",
     "pg": "^8.12.0"
   }
